@@ -1,0 +1,49 @@
+{
+  "$schema": "https://gofastmcp.com/public/schemas/fastmcp.json/v1.json",
+  "name": "google-sheets-mcp",
+  "version": "1.0.0",
+  "description": "FastMCP server for Google Sheets with formulas, formatting, charts, and data validation",
+  "source": {
+    "path": "src/server.py",
+    "entrypoint": "mcp"
+  },
+  "environment": {
+    "dependencies": [
+      "fastmcp>=2.0.0",
+      "google-auth>=2.29.0",
+      "google-auth-oauthlib>=1.2.0",
+      "google-auth-httplib2>=0.2.0",
+      "google-api-python-client>=2.122.0",
+      "python-dotenv>=1.0.0"
+    ],
+    "variables": {
+      "GDRIVE_CREDS_DIR": {
+        "description": "Directory containing Google OAuth credentials",
+        "required": false,
+        "default": "~/.config/mcp-gdrive"
+      }
+    }
+  },
+  "tools": [
+    "sheets_create",
+    "sheets_read",
+    "sheets_write",
+    "sheets_append",
+    "sheets_get_sheet_id",
+    "sheets_delete_rows",
+    "sheets_insert_rows",
+    "sheets_clear_range",
+    "sheets_find_replace",
+    "sheets_duplicate_sheet",
+    "sheets_delete_duplicates",
+    "sheets_trim_whitespace",
+    "sheets_merge_cells",
+    "sheets_copy_paste",
+    "sheets_format_cells",
+    "sheets_add_borders",
+    "sheets_add_chart",
+    "sheets_add_dropdown",
+    "sheets_conditional_format",
+    "sheets_sort_range"
+  ]
+}

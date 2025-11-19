@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--project",
+        "/path/to/google-sheets",
+        "python",
+        "src/server.py"
+      ],
+      "env": {
+        "GDRIVE_CREDS_DIR": "/path/to/.config/mcp-gdrive"
+      }
+    }
+  }
+}
