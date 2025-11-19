@@ -29,8 +29,6 @@ def get_credentials():
     2. File-based (for local dev): GDRIVE_CREDS_DIR with gcp-oauth.keys.json and sheets-token.json
     """
     global _creds
-    if _creds:
-        return _creds
 
     # Mode 1: Environment variables (for deployment)
     client_id = os.getenv('GOOGLE_CLIENT_ID')
@@ -38,6 +36,7 @@ def get_credentials():
     refresh_token = os.getenv('GOOGLE_REFRESH_TOKEN')
 
     if client_id and client_secret and refresh_token:
+        # Always create fresh credentials in serverless environment
         creds = Credentials(
             token=None,
             refresh_token=refresh_token,
@@ -47,8 +46,11 @@ def get_credentials():
             scopes=SCOPES
         )
         creds.refresh(Request())
-        _creds = creds
         return creds
+
+    # Mode 2: File-based - use caching for local dev
+    if _creds and _creds.valid:
+        return _creds
 
     # Mode 2: File-based (for local development)
     creds_dir = os.getenv('GDRIVE_CREDS_DIR', os.path.expanduser('~/.config/mcp-gdrive'))
